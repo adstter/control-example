@@ -1,0 +1,183 @@
+<ion-view ng-controller="MainController as controller">
+  <ion-content>
+    <div class="container">
+      <div class="section-scenes">
+        <div class="segment-header">
+          Escenas (
+          <span ng-if="model.musicController.connected" style="width: 100px; height: 100px; background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span ng-if="!model.musicController.connected" style="width: 100px; height: 100px; background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span ng-if="model.batchController.connected" style="width: 100px; height: 100px; background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span ng-if="!model.batchController.connected" style="width: 100px; height: 100px; background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;</span> )
+        </div>
+        <div class="actions-container">
+          <button ng-show="model.config.allowChangeVolume" class="card button  button-stable adstter-option" ng-click="viewVolume();">
+            Volumen
+          </button>
+          <button class="card button  button-stable adstter-option {{!model.musicController.getOnPause()?'adstter-active':''}}" ng-click="viewMusic();">
+            {{model.config.adstterMusicLabel?model.config.adstterMusicLabel: 'Adstter Music'}}
+          </button>
+          <button ng-show="!model.musicController.getOnPause() && model.config.secondPlaneMusic" class="card button  button-stable adstter-option {{model.musicController.isFullscreen() || model.musicController.getOnPause()?'':'adstter-active'}}"
+            ng-click="viewSecondPlaneDialog();">
+            Música en segundo plano
+          </button>
+          <button ng-show="model.musicController.getOnPause() && model.config.secondPlaneMusic" class="card button  button-stable adstter-option {{model.musicController.isFullscreen() || model.musicController.getOnPause()?'':'adstter-active'}}"
+            ng-click="startSecondPlaneMusic();">
+            Música en segundo plano
+          </button>
+          <button ng-show="!model.musicController.getOnPause() && model.config.allowYoutube"
+            class="card button  button-stable adstter-option" ng-click="viewYoutube(false);">
+            Youtube
+          </button>
+          <button ng-show="model.config.allowYoutubeLive" class="card button button-stable adstter-option {{model.batchController.getLastBatch().startsWith('open-browser.bat')?'adstter-active':''}}"
+            ng-click="viewYoutube(true);">
+            En vivo
+          </button>
+          <button ng-show="model.config.showRCAButton" class="card button  button-stable adstter-option  {{model.batchController.getLastBatch().endsWith('start-cam.bat')?'adstter-active':''}}"
+            ng-click="viewCam();">
+            <div ng-if="(model.musicController.getOnPause() || model.batchController.getLastBatch().endsWith('start-cam.bat')) && model.config.pauseTime && model.config.pauseTime > 0"
+              style='width:100%; font-size:0.7em; background-color: rgba(27,41,59,1); position: relative;'>
+              <div style='position: absolute; width: 100%; height: 10px; top:-15px; left:0'>
+                {{model.formatDateToHhMmSs(model.getPauseRemainingSeconds())}}
+              </div>
+              <div ng-style="model.getPauseProgressStyle()"></div>
+            </div>
+            {{model.config.rcaLabel}}
+          </button>
+          <button ng-show="model.config.showCoaxialButton && model.config.allowChannelChange" class="card button button-stable adstter-option  {{model.batchController.getLastBatch().indexOf('change-channel.bat') >= 0 ?'adstter-active':''}}"
+            ng-click="viewChannels();">
+            <div ng-if="(model.musicController.getOnPause() || model.batchController.getLastBatch().indexOf('change-channel.bat') >= 0) && model.config.pauseTime && model.config.pauseTime > 0"
+              style='width:100%; font-size:0.7em; background-color: rgba(27,41,59,1); position: relative;'>
+              <div style='position: absolute; width: 100%; height: 10px; top:-15px; left:0'>
+                {{model.formatDateToHhMmSs(model.getPauseRemainingSeconds())}}
+              </div>
+              <div ng-style="model.getPauseProgressStyle()"></div>
+            </div>
+            {{model.config.coaxialLabel}}
+
+          </button>
+          <button ng-show="model.config.showCoaxialButton && !model.config.allowChannelChange" class="card button button-stable adstter-option  {{model.batchController.getLastBatch().endsWith('start-cable.bat') ? 'adstter-active':''}}"
+            ng-click="viewCable();">
+            <div ng-if="(model.musicController.getOnPause() || model.batchController.getLastBatch().endsWith('start-cable.bat'))&& model.config.pauseTime && model.config.pauseTime > 0"
+              style='width:100%; font-size:0.7em; background-color: rgba(27,41,59,1); position: relative;'>
+              <div style='position: absolute; width: 100%; height: 10px; top:-15px; left:0'>
+                {{model.formatDateToHhMmSs(model.getPauseRemainingSeconds())}}
+              </div>
+              <div ng-style="model.getPauseProgressStyle()"></div>
+            </div>
+            {{model.config.coaxialLabel}}
+
+          </button>
+          <button ng-if="!model.batchController.connected && model.config.showSearchForConnection" class="card button adstter-option"
+            ng-click="searchConnection();">
+            Buscar conexión
+          </button>
+          <button ng-show="!model.musicController.getOnPause()" ng-repeat="ad in model.config.ads track by $index" class="card button adstter-option {{model.selectedAd === ad?'adstter-active':''}}"
+            ng-click="showAd(ad.device, ad.code);">
+            {{ad.name}}
+          </button>
+        </div>
+      </div>
+      <div class="section-level1" ng-show="model.config.allowVoteSong || model.config.allowNextSong">
+        <div class="segment-header">
+          Pon musica
+        </div>
+        <div class="actions-container-dark">
+          <button ng-show="!model.musicController.getOnPause() && model.config.allowNextSong" class="card button  button-stable adstter-option"
+            ng-click="nextAd()">
+            <ion-icon name="musical-notes"></ion-icon> Siguiente canción
+          </button>
+          <button ng-show="!model.musicController.getOnPause() && model.config.allowVoteSong" class="card button  button-stable adstter-option"
+            ng-click="goToPonmusica()">
+            <ion-icon name="musical-notes"></ion-icon> Votar por canción
+          </button>
+        </div>
+      </div>
+      <div class="section-scenes" ng-show="hasPlaylists && model.config.enablePlaylistsSelection">
+        <div class="segment-header">
+          Playlists
+        </div>
+        <div class="actions-container" ng-if="model.musicController.configuration.playlists && model.musicController.configuration.playlists.length > 0">
+          <div>Principal</div>
+          <button class="card button adstter-option {{isAnyPlaylistsSelected(model.musicController.configuration)?'':'adstter-active'}}"
+            ng-click="toggleAutomaticReproduction(model.musicController.configuration);">
+            Reproducción automática
+          </button>
+          <button ng-repeat="playlist in model.musicController.configuration.playlists track by $index" class="card button adstter-option  {{getPlaylistClass(playlist, model.musicController.configuration)}}"
+            ng-click="togglePlaylist(playlist, model.musicController.configuration);">
+            {{playlist.name}}
+          </button>
+          <div>
+            {{isAnyPlaylistsSelected(model.musicController.configuration)?'Reproduciendo playlists seleccionados': 'Reproduciendo playlists
+            programados por el horario'}}
+          </div>
+        </div>
+        <div ng-repeat="component in model.musicController.configuration.components track by $index">
+          <div>
+            {{component.name}}
+          </div>
+          <div class="actions-container" ng-if="component.playlists && component.playlists.length > 0">
+            <button ng-repeat="playlist in component.playlists track by $index" class="card button adstter-option {{getPlaylistClass(playlist, component)}}"
+              ng-click="togglePlaylist(playlist, component);">
+              {{playlist.name}}
+            </button>
+          </div>
+          <!--div>
+                        {{isAnyPlaylistsSelected(component)?'Reproduciendo playlists seleccionados': 'Reproduciendo playlists programados por el
+                        horario'}}
+                    </div-->
+        </div>
+      </div>
+      <div class="section-scenes" ng-show="model.config.allowOffline || model.config.allowReloadMusic || model.config.allowReloadSystem">
+        <div class="segment-header">
+          Opciones Avanzadas
+        </div>
+        <div class="actions-container">
+          <button class="card button  button-stable adstter-option" ng-click="restartSystem()" ng-show="model.config.allowReloadSystem">
+            <ion-icon name="musical-notes"></ion-icon> Reiniciar el sistema
+          </button>
+          <button ng-show="model.config.allowOffline && !model.musicController.getOnPause()" class="card button  button-stable adstter-option {{model.musicController.isOffline()?'adstter-active':''}}"
+            ng-click="toggleOffline();">
+            Fuera de línea
+          </button>
+          <button class="card button  button-stable adstter-option" ng-click="restartMusic();" ng-show="model.config.allowReloadMusic">
+            <ion-icon name="desktop"></ion-icon> Recargar musica
+          </button>
+        </div>
+      </div>
+      <div class="section-level1">
+        <div class="segment-header">
+          Configuracion
+        </div>
+        <div class="actions-container-dark">
+          <button class="card button  button-stable adstter-option" ng-click="viewAdvancedConfig();">
+            Configuración avanzada
+          </button>
+        </div>
+      </div>
+      <div class="section-scenes" ng-if="model.musicController.screenshot">
+        <div class="segment-header">
+          Pantalla
+        </div>
+        <div class="actions-container">
+          <div class="row">
+            <div class="col">
+              <div ng-if="model.batchController.getLastBatch().indexOf('change-channel.bat') >= 0">
+                <h1>Canal actual {{model.actualChannel}}</h1>
+                <button class="button button-stable" ng-click="changeChannel(model.actualChannel + 1);">Arriba ({{model.actualChannel + 1}})</button>
+                <br/>
+                <button class="button button-stable" ng-click="changeChannel(model.actualChannel - 1);">Abajo ({{model.actualChannel - 1}})</button>
+              </div>
+            </div>
+            <div class="col-75">
+              <img ng-src="{{'data:image/png;base64,'+model.musicController.screenshot}}" style="max-width: 600px; max-height: 600px;"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center top-space header">
+        <img src="img/LogoAdstter400_100.png" />
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

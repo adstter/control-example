@@ -1,0 +1,34 @@
+<ion-view ng-controller="LiveTv1Controller as controller" class="light">
+    <ion-content>
+          <div class="row responsive-sm">
+            <div class="col">
+                <div class="list card">
+
+                    <div class="item item-avatar">
+                        <img src="img/a_logo.png"/>
+                        <h1>Adstter Music</h1>
+                    </div>
+                    <ul class="list">
+
+                        <ion-toggle ng-model="model.musicVolume" toggle-class="toggle-calm" ng-click="saveMusicVolume();">Música</ion-toggle>
+                        <ion-toggle ng-model="model.tvVolume" toggle-class="toggle-calm" ng-click="saveTvVolume();">Televisión</ion-toggle>
+                        
+                    </ul>   
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="list card">
+                    <div class="item item-avatar">
+                        <img src="img/a_logo.png"/>
+                        <h1>Adstter Live TV</h1>
+                    </div>
+                    <ul class="list">
+                        <ion-toggle ng-model="model.liveTv" toggle-class="toggle-assertive" ng-click="saveTvState();">Activado</ion-toggle>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

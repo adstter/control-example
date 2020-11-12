@@ -1,0 +1,204 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Configuraciones avanzadas</h1>
+  </ion-header-bar>
+  <ion-content>
+    <h1>Configuraciones de conexión</h1>
+    <label class="item item-input">
+      <input type="text" ng-model="model.config.adstterMusicLabel" placeholder="Etiqueta de boton de música" />
+    </label>
+    <label class="item item-input">
+      <input type="text" ng-model="model.config.playerAddress" placeholder="Dirección Ip" />
+    </label>
+    <label class="item item-input">
+      <input type="number" ng-model="model.config.playerCode" placeholder="Código del dispositivo" />
+    </label>
+    <label class="item item-input">
+      <input type="text" ng-model="model.config.ponmusicaCode" placeholder="Código de ponmusica" />
+    </label>
+    <label class="item item-input">
+      <input type="number" ng-model="model.config.pauseTime" placeholder="Tiempo máximo de pausa" />
+    </label>
+    <hr/>
+    <h1>Conexión coaxial</h1>
+    <label class="item item-input">
+      <input type="text" ng-model="model.config.coaxialLabel" placeholder="Etiqueta coaxial" />
+    </label>
+    <li class="item item-toggle">
+      Mostrar botón
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.showCoaxialButton">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <li class="item item-toggle" ng-show="model.config.showCoaxialButton">
+      Permite cambiar de canal
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.allowChannelChange">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <div ng-show="model.config.allowChannelChange">
+      <label class="item item-input">
+        <input type="number" ng-model="model.config.minChannel" placeholder="Canales desde" />
+      </label>
+      <label class="item item-input">
+        <input type="number" ng-model="model.config.maxChannel" placeholder="Canales hasta" />
+      </label>
+    </div>
+    <hr/>
+    <h1>Conexión RCA</h1>
+    <label class="item item-input">
+      <input type="text" ng-model="model.config.rcaLabel" placeholder="Etiqueta RCA" />
+    </label>
+    <li class="item item-toggle">
+      Mostrar botón
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.showRCAButton">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <hr/>
+    <h1>Configuración música</h1>
+    <li class="item item-toggle">
+      Permitir buscar por conexión
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.showSearchForConnection">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <li class="item item-toggle">
+      Permitir seleccionar playlists
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.enablePlaylistsSelection">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <li class="item item-toggle">
+      Permitir música en segundo plano
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.secondPlaneMusic">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <li class="item item-toggle">
+      Permitir abrir mobdro
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.mobdroAvailable">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <li class="item item-toggle">
+      Permitir modo offline
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.allowOffline">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <li class="item item-toggle">
+      Permitir cambiar volumen
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.allowChangeVolume">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <li class="item item-toggle">
+      Permitir votar cancion
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.allowVoteSong">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <li class="item item-toggle">
+      Permitir saltar cancion
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.allowNextSong">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <li class="item item-toggle">
+      Permitir recargar musica
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.allowReloadMusic">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <li class="item item-toggle">
+      Permitir recargar sistema
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.allowReloadSystem">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <li class="item item-toggle">
+      Permitir buscar en youtube
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.allowYoutube">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <li class="item item-toggle">
+      Permitir buscar en youtube en vivo
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-model="model.config.allowYoutubeLive">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+      </label>
+    </li>
+    <h1>Anuncios definidos</h1>
+    <label class="item item-input">
+      <input type="text" ng-model="model.adName" placeholder="Nombre del anuncio" />
+    </label>
+    <label class="item item-input">
+      <input type="text" ng-model="model.adCode" placeholder="Código del anuncio" />
+    </label>
+    <label class="item item-input">
+      <input type="text" ng-model="model.adDevice" placeholder="Código del controlador" />
+    </label>
+    <button class="button button-full button-positive" ng-click="addAd();" ng-show="!model.selectedAd">
+      Agregar
+    </button>
+    <button class="button button-full button-positive" ng-click="saveAd();" ng-show="model.selectedAd">
+      Guardar
+    </button>
+    <button class="button button-full button-assertive" ng-show="model.selectedAd" ng-click="removeAd();">
+      Eliminar
+    </button>
+    <button ng-repeat="ad in model.config.ads track by $index" class="card button adstter-option {{model.selectedAd === ad?'adstter-active':''}}"
+      ng-click="selectAd(ad);">
+        {{ad.name}}
+    </button>
+    <button class="button button-full button-assertive" ng-click="closeConfiguration();">
+        Cerrar
+    </button>
+  </ion-content>
+</ion-modal-view>

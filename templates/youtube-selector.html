@@ -1,0 +1,26 @@
+<ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Buscar video de youtube</h1>
+    </ion-header-bar>
+  <ion-content overflow-scroll="true">
+    <label class="item item-input">
+      <input type="text" ng-model="model.config.youtubeSearch" placeholder="Texto de busqueda" />
+    </label>
+    <label class="item item-input">
+     <button class="button button-full button-positive" ng-click="searchYoutube();">Buscar</button>
+    </label>
+    <div class="text-center">
+      <button ng-repeat="youtubeVideo in model.youtubeResults track by $index" class="card button adstter-option" ng-click="selectYoutubeVideo(youtubeVideo);">
+          <img ng-src="{{youtubeVideo.snippet.thumbnails.default.url}}"/>  <br/>
+           {{youtubeVideo.snippet.title}}
+      </button>
+    </div>
+    <div class="text-center">
+        <iframe ng-show="youtubeVideo" id="songVideo" class="embed-responsive-item" style="width: 100%; height: 400px;"></iframe>
+        <input ng-show="youtubeVideo" type="checkbox" ng-model="model.useAdstterVideo" ng-true-value="true" ng-false-value="false"/> <span ng-show="youtubeVideo">Utilizar video certificado de Adstter</span>
+        <button ng-show="youtubeVideo" class="button button-full button-positive" ng-click="sendYoutubeVideo();">
+            Transmitir video
+        </button>
+    </div>
+  </ion-content>
+</ion-modal-view>

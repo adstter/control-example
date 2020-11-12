@@ -1,0 +1,17 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "Adstter Live TV",
+  "short_name": "Adstter Live TV",
+  "version": "com.ionicframework.appcontroller685894",
+  "description": "Adstter Live TV Controller",
+  "author": "Juan Luis Angel Cano Moreno",
+  "icons": [
+    {
+      "src": "resources\\android\\icon\\drawable-mdpi-icon.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    }
+  ],
+  "start_url": "index.html"
+}

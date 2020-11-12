@@ -1,0 +1,42 @@
+<ion-view ng-controller="MenuBoardController as controller" class="light">
+    <ion-content>
+          <div class="row responsive-sm">
+            <div class="col">
+                <div class="list card">
+                    <div class="item item-avatar">
+                        <img src="/img/a_logo.png"/>
+                        <h1>Animación 1</h1>
+                        <p>Animación del menu board</p>
+                    </div>
+
+                    <div class="item item-image">
+                        <img src="cover.jpg">
+                    </div>
+
+                    <a class="item item-icon-left assertive" href="javascript:void(0);" ng-click="playAnimation(0);">
+                        <i class="icon ion-play"></i>
+                        Reproducir
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="list card">
+                    <div class="item item-avatar">
+                        <img src="/img/a_logo.png"/>
+                        <h1>Animación 2</h1>
+                        <p>Animación en todo el establecimiento</p>
+                    </div>
+
+                    <div class="item item-image">
+                        <img src="cover.jpg">
+                    </div>
+
+                    <a class="item item-icon-left assertive" href="#/live-tv1" ng-click="playAnimation(1);">
+                        <i class="icon ion-play"></i>
+                        Reproducir
+                    </a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,62 @@
+<ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Canales</h1>
+    </ion-header-bar>
+  <ion-content>
+    <h3>Todos los canales</h3>
+    <div class="text-center">
+      <button ng-repeat="a in model.range(model.config.maxChannel) track by $index" class="card button adstter-option {{model.batchController.getLastBatch() === 'change-channel.bat ' + ($index + model.config.minChannel) ?'adstter-active':''}}" ng-click="changeChannel($index + model.config.minChannel);">
+        <h1>{{$index + model.config.minChannel}}</h1>
+      </button>
+    </div>
+    <!--h3>Nacionales</h3>
+    <div class="text-center">
+        <button class="card button adstter-option" ng-click="changeChannel(3);">
+            <img src="img/canal3.jpg" class="full-image"/>
+        </button>
+        <button class="card button adstter-option" ng-click="changeChannel(7);">
+            <img src="img/canal7.jpg" class="full-image"/>
+        </button>
+        <button class="card button adstter-option" ng-click="changeChannel(11);">
+            <img src="img/canal11.jpg" class="full-image"/>
+        </button>
+        <button class="card button adstter-option" ng-click="changeChannel(13);">
+            <img src="img/canal13.jpg" class="full-image"/>
+        </button>
+    </div>
+
+    <h3>Infantiles</h3>
+    <div class="text-center">
+        <button class="card button adstter-option" ng-click="changeChannel(18);">
+            <img src="img/canal18.png" class="full-image"/>
+        </button>
+        <button class="card button adstter-option" ng-click="changeChannel(20);">
+            <img src="img/canal20.png" class="full-image"/>
+        </button>
+        <button class="card button adstter-option" ng-click="changeChannel(21);">
+            <img src="img/canal21.png" class="full-image"/>
+        </button>
+    </div>
+    <h3>Deportes</h3>
+    <div class="text-center">
+        <button class="card button adstter-option" ng-click="changeChannel(35);">
+            <img src="img/canal35.png" class="full-image"/>
+        </button>
+        <button class="card button adstter-option" ng-click="changeChannel(36);">
+            <img src="img/canal36.jpg" class="full-image"/>
+        </button>
+        <button class="card button adstter-option" ng-click="changeChannel(37);">
+            <img src="img/canal37.png" class="full-image"/>
+        </button>
+        <button class="card button adstter-option" ng-click="changeChannel(38);">
+            <img src="img/canal38.png" class="full-image"/>
+        </button>
+        <button class="card button adstter-option" ng-click="changeChannel(39);">
+            <img src="img/canal39.png" class="full-image" />
+        </button>
+        <button class="card button adstter-option" ng-click="changeChannel(40);">
+            <img src="img/canal40.png" class="full-image"/>
+        </button>
+    </div-->    
+  </ion-content>
+</ion-modal-view>    
